@@ -1,35 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
+import {type RootState } from '../store/store';
+import ShowSelectedCard from '../components/ShowSelectedCard';
+import ShowCardList from '../components/ShowCardList';
 
 export default function FrontPage() {
-    const [cards, setCards] = useState<{cardNumber: string, firstName: string, lastName: string, securityNumber: number} []> ([]);
-
-    useEffect(() => {
-
-        const list = [
-            ...cards, 
-            {
-            cardNumber: "123 123 123 123 123",
-            firstName: "Nikki", 
-            lastName: "Norberg", 
-            securityNumber: 123
-            }
-        ];
-        setCards(list);
-        //This might not be needed, im not sure yet
-    }, []);
-
+    const cards = useSelector((state:RootState) => state.cardList.cards)
+    const selectedCard = useSelector((state:RootState) => state.selectedCard.selectedCard);
 
     return (
-    <>
-        <h1> Your wallet </h1>
-        <section>
-            <ul>
-                {cards.map(card =>(
-                    <li key = {card.cardNumber}> Cardnr: {card.cardNumber} Cardholder: {card.firstName} {card.lastName} securityNumber: {card.securityNumber} </li>
-                ))}
-            </ul>
-        </section>
-    </>
-)
+        <>
+            <h1> Your wallet </h1>
+            <section>
+                <ShowSelectedCard card = {selectedCard}/>
+                <ShowCardList cards = {cards.filter(card => card.cardNumber !== selectedCard.cardNumber)}/>
+            </section>
+        </>
+    )
 }
 
