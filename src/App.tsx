@@ -1,17 +1,13 @@
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
 import AppRouter from "./routers/AppRouter";
-import "./App.css";
+import "./index.css";
 
 export default function App() {
     return (
         <BrowserRouter>
-            <header>
-                <nav>
-                    <Link to="/"> Home </Link>
-                    <Link to="/add"> Add Card </Link>
-                </nav>
-            </header>
+        <section className = "app">
             <AppRouter/>
+        </section>
         </BrowserRouter>
     )
 }

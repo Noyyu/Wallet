@@ -5,6 +5,7 @@ export const store = configureStore({
     reducer: {
         cardList: cardReducer,
         selectedCard: cardReducer,
+        newCard: cardReducer
     }
 });
 
